@@ -1,6 +1,6 @@
 import { fn } from "storybook/test";
 
-import MyButton from "./MyButton.vue";
+import MyButton from "./buttons/MyButton.vue";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories
 export default {
