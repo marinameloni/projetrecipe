@@ -11,10 +11,8 @@
 <script>
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  props: {}
   }
-}
 </script>
 
 <style lang="scss" scoped>
