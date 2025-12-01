@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+definePageMeta({
+    layout: 'aside'
+});
 </script>
 <template>
     <div>

@@ -1,12 +1,12 @@
 <template>
     <div class="ly-aside">
         <aside class="ly-aside-sidebar">Sidebar</aside>
-        <main>Contenu de la page</main>
+        <main> Contenu de la page
          <slot />
     </main>
 </div>
 </template>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .ly-aside {
     display: flex;
 }
