@@ -1,0 +1,23 @@
+@use "elements/button"as*;
+@use "elements/card"as*;
+@use "foundations/variables"as*;
+@use "foundations/mixins"as*;
+
+* {
+    font-family: var(--font-primary);
+}
+h1 {
+    @include h1();
+}
+
+h2 {
+    @include h2();
+}
+
+h3 {
+    @include h3();
+}
+
+p {
+    @include p();
+}

@@ -1,0 +1,7 @@
+// SCSS functions
+// Add your custom functions here
+
+// Example: Convert px to rem
+@function px-to-rem($px, $base: 16) {
+  @return calc($px / $base) * 1rem;
+}
