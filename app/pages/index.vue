@@ -60,6 +60,16 @@ const filteredRecipes = computed(() => {
 
 const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
 
+useHead({
+  title: 'Simple and Tasty Recipes | Home',
+  meta: [
+    {
+      name: 'description',
+      content: 'Discover simple and tasty recipes from various cuisines. Browse our collection of delicious recipes with detailed instructions and ingredients.'
+    }
+  ]
+})
+
 definePageMeta({
   layout: 'aside'
 })

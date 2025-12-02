@@ -32,6 +32,16 @@ const { data: otherRecipes } = await useAsyncData<Recipe[]>(
   { server: false, default: () => [] }
 )
 
+useHead({
+  title: computed(() => recipe.value?.title ? `${recipe.value.title} | Recipe` : 'Recipe'),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => recipe.value?.description || 'Discover this delicious recipe with detailed instructions and ingredients.')
+    }
+  ]
+})
+
 definePageMeta({
   layout: 'aside'
 })
