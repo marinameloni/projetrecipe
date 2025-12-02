@@ -4,12 +4,12 @@ const config = useRuntimeConfig()
 // Normalize base URL to avoid double slashes
 const apiBase = (config.public.apiUrl || '').replace(/\/+$/, '')
 
-const { data: recipes } = await useAsyncData(
+const { data: recipes } = await useAsyncData<Recipe[]>(
   'recipes-list',
   async () => {
     try {
-      const res = await $fetch<Recipe[] | { data: Recipe[] }>(`${apiBase}/api/recipes`)
-      return Array.isArray(res) ? res : (res?.data ?? [])
+      const res = await $fetch<ApiResponse<Recipe[]>>(`${apiBase}/api/recipes`)
+      return res.data
     } catch (err) {
       console.error('Failed to fetch recipes:', err)
       return []

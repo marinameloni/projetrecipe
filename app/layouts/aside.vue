@@ -1,7 +1,7 @@
 <template>
     <div class="ly-aside">
-        <aside class="ly-aside-sidebar">Sidebar</aside>
-        <main> Contenu de la page
+        <a href="/"><aside class="ly-aside-sidebar">Foodieland</aside></a>
+        <main>
          <slot />
     </main>
 </div>

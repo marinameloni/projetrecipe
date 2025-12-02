@@ -3,16 +3,12 @@ const route = useRoute()
 const config = useRuntimeConfig()
 const apiBase = (config.public.apiUrl || '').replace(/\/+$/, '')
 
-const hasData = (res: unknown): res is { data: Recipe } => {
-  return !!res && typeof res === 'object' && 'data' in (res as Record<string, unknown>)
-}
-
-const { data: recipe } = await useAsyncData<Recipe | null>(
+const { data: recipe } = await useAsyncData<FullRecipe | null>(
   () => `recipe-${route.params.id}`,
   async () => {
     try {
-      const res = await $fetch<Recipe | { data: Recipe }>(`${apiBase}/api/recipes/${route.params.id}`)
-      return hasData(res) ? res.data : res
+      const res = await $fetch<ApiResponse<FullRecipe>>(`${apiBase}/api/recipes/${route.params.id}`)
+      return res.data
     } catch (err) {
       console.error('Failed to fetch recipe:', err)
       return null
