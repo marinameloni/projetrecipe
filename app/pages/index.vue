@@ -18,6 +18,33 @@ const { data: recipes } = await useAsyncData<Recipe[]>(
   { server: false, default: () => [] }
 )
 
+const { data: cuisines } = await useAsyncData<Cuisine[]>(
+  'cuisines-list',
+  async () => {
+    
+    const { data } = await $fetch<ApiResponse<Cuisine[]>>(
+      `${apiBase}/api/cuisines`
+    )
+    return data
+  },
+  { server: false, default: () => [] }
+)
+
+const filters = ref<string[]>([]);
+
+function onCheckboxInput($event: Event) {
+  const target = $event.target;
+  if (!(target instanceof HTMLInputElement)) return;
+
+  const value = target.value
+  if (!filters.value.includes(value)){
+    filters.value.push(value)
+  } else {
+    const index = filters.value.findIndex(v => v == value)
+    filters.value.splice(index, 1)
+  }
+}
+
 const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
 
 definePageMeta({
@@ -52,6 +79,22 @@ definePageMeta({
       </li>
     </ul>
     <p v-else>No recipes found.</p>
+
+    <div class="recipe-filters">
+      <h2>Filter by Cuisine</h2>
+      <p>Active filters: {{ filters }}</p>
+      <ul>
+        <li v-for="(cuisine, index) in cuisines" :key="index">
+          <input
+            :id="cuisine.name"
+            type="checkbox"
+            :value="cuisine.name"
+            @click="onCheckboxInput"
+          >
+          <label :for="cuisine.name">{{ cuisine.name }}</label>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
