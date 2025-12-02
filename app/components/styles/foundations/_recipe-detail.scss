@@ -485,9 +485,9 @@ $border-radius-lg: 24px;
 
   // Element: thumb
   &__thumb {
-    width: 120px;
+    width: 80px;
     height: 80px;
-    border-radius: 10%;
+    border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
   }
@@ -525,108 +525,4 @@ $border-radius-lg: 24px;
   text-align: center;
   padding: 40px;
   color: $color-text-grey;
-}
-
-// Block: newsletter-signup
-.newsletter-signup {
-  background-color: $color-bg-light;
-  background-image: url('/newsletterbg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: $border-radius-lg;
-  padding: 50px 40px;
-  margin-top: 60px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(234, 250, 255, 0.95);
-    z-index: 0;
-  }
-
-  // Element: title
-  &__title {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: $color-text-dark;
-    position: relative;
-    z-index: 1;
-  }
-
-  // Element: description
-  &__description {
-    font-size: 1rem;
-    color: $color-text-grey;
-    margin-bottom: 2rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  // Element: form
-  &__form {
-    display: flex;
-    gap: 12px;
-    max-width: 500px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-    }
-  }
-
-  // Element: input
-  &__input {
-    flex: 1;
-    padding: 16px 20px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    font-size: 1rem;
-    font-family: $font-family-main;
-    background-color: white;
-    transition: border-color 0.2s;
-
-    &:focus {
-      outline: none;
-      border-color: $color-text-dark;
-    }
-
-    &::placeholder {
-      color: $color-text-grey;
-    }
-  }
-
-  // Element: button
-  &__button {
-    padding: 16px 32px;
-    background-color: $color-text-dark;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: $font-family-main;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.2s;
-    white-space: nowrap;
-
-    &:hover {
-      transform: translateY(-2px);
-      background-color: lighten($color-text-dark, 10%);
-    }
-
-    &:active {
-      transform: translateY(0);
-    }
-  }
 }

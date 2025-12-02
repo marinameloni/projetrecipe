@@ -10,12 +10,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `
-          @use "@/styles/foundations/functions" as *;
-          @use "@/styles/foundations/variables" as *;
-          @use "@/styles/foundations/mixins" as *;
-
-          `,
+          additionalData: `@use "~/styles/foundations/variables" as *; @use "~/styles/foundations/functions" as *; @use "~/styles/foundations/mixins" as *;`,
         },
       },
     },
