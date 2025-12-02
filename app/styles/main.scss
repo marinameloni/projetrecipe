@@ -7,6 +7,9 @@
 @use "elements/button" as *;
 @use "elements/card" as *;
 
+// Pages
+@use "pages/index" as *;
+
 * {
     font-family: var(--font-primary);
 }

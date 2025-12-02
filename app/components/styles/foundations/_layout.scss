@@ -1,0 +1,38 @@
+.o-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.o-recipeBlock {
+    margin: 60px 0;
+}
+
+.o-section {
+    margin: 80px 0;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+    }
+
+    &--center {
+        text-align: center;
+
+        p {
+            margin: 0 auto 40px;
+            max-width: 600px;
+        }
+    }
+}
+
+.o-gridList {
+    display: grid;
+    // Creates the 3-column layout
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+}

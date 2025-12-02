@@ -63,48 +63,94 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <div class="o-container">
+    
     <div class="o-recipeBlock">
-      <div class="m-card">
+      <article class="m-card m-card--hero">
         <div class="m-card__contentLeft">
-          <h1>Spicy delicious chicken wings</h1>
+          <div class="a-badgeWrapper">
+            <span class="a-badge">🔥 Hot Recipes</span>
+          </div>
+          <h1 class="m-card__title">Spicy delicious chicken wings</h1>
+          <p class="m-card__description">
+            Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor 
+            incididunt ut labore et dolore magna aliqut enim ad minim.
+          </p>
+          
+          <div class="m-metaList">
+            <span class="a-metaTag">⏱ 30 Minutes</span>
+            <span class="a-metaTag">🍗 Chicken</span>
+          </div>
+
+          <div class="m-card__actions">
+            <div class="a-userProfile">
+                <div class="a-avatar"></div>
+                <div class="a-userInfo">
+                    <span>John Smith</span>
+                    <small>15 March 2022</small>
+                </div>
+            </div>
+            <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="a-button a-button--black">
+              View Recipes <span class="a-icon">▶</span>
+            </NuxtLink>
+          </div>
         </div>
 
         <div class="m-card__mediaWrapper">
-          <img src="https://placeholder.pics/svg/600x400" alt="Delicious Chicken Wings">
+          <img :src="recipes?.[0]?.image_url || 'https://placeholder.pics/svg/600x600'" alt="Delicious Chicken Wings" class="m-card__image">
+          <div class="a-floatingBadge">
+             <span>Handpicked</span>
+          </div>
         </div>
-        <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="a-button -primary">
-          View Recipe
-        </NuxtLink>
-      </div>
+      </article>
     </div>
     
-    <h2>Categories</h2>
-    <h3>Simple and fun recipes</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    
-    <ul v-if="filteredRecipes && filteredRecipes.length">
-      <li v-for="(recipe, index) in filteredRecipes" :key="index">
-        <NuxtLink :to="`/recipe/${recipe.recipe_id}`">{{ recipe.title }}</NuxtLink>
-      </li>
-    </ul>
-    <p v-else>No recipes found.</p>
+    <section class="o-section">
+        <header class="o-section__header">
+            <h2>Categories</h2>
+            <NuxtLink to="/categories" class="a-linkButton">View All Categories</NuxtLink>
+        </header>
+        
+        <div class="m-categoryFilters">
+            <div v-for="(cuisine, index) in cuisines" :key="index" class="m-categoryFilters__item">
+                <input
+                    :id="cuisine.name"
+                    type="checkbox"
+                    class="a-checkbox"
+                    :value="cuisine.name"
+                    @click="onCheckboxInput"
+                >
+                <label :for="cuisine.name" class="a-categoryChip">
+                    {{ cuisine.name }}
+                </label>
+            </div>
+        </div>
+    </section>
 
-    <div class="recipe-filters">
-      <h2>Filter by Cuisine</h2>
-      <p>Active filters: {{ filters }}</p>
-      <ul>
-        <li v-for="(cuisine, index) in cuisines" :key="index">
-          <input
-            :id="cuisine.name"
-            type="checkbox"
-            :value="cuisine.name"
-            @click="onCheckboxInput"
-          >
-          <label :for="cuisine.name">{{ cuisine.name }}</label>
+    <section class="o-section o-section--center">
+      <div class="o-section__content">
+        <h3>Simple and tasty recipes</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      
+      <ul v-if="filteredRecipes && filteredRecipes.length" class="o-gridList">
+        <li v-for="(recipe, index) in filteredRecipes" :key="index" class="m-recipeCard">
+          <div class="m-recipeCard__media">
+             <img :src="recipe.image_url || 'https://placeholder.pics/svg/400x300'" :alt="recipe.title">
+          </div>
+          <div class="m-recipeCard__content">
+             <h4 class="m-recipeCard__title">
+                <NuxtLink :to="`/recipe/${recipe.recipe_id}`">{{ recipe.title }}</NuxtLink>
+             </h4>
+             <div class="m-metaList">
+                <span class="a-metaTag">⏱ 30 Minutes</span>
+                <span class="a-metaTag">🍽 {{ recipe.cuisine_name || 'Snack' }}</span>
+             </div>
+          </div>
         </li>
       </ul>
-    </div>
+      <p v-else>No recipes found.</p>
+    </section>
+
   </div>
 </template>
-
