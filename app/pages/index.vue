@@ -45,6 +45,16 @@ function onCheckboxInput($event: Event) {
   }
 }
 
+const filteredRecipes = computed(() => {
+  if (!recipes.value || filters.value.length === 0) {
+    return recipes.value || []
+  }
+  
+  return recipes.value.filter(recipe => 
+    filters.value.includes(recipe.cuisine_name || '')
+  )
+})
+
 const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
 
 definePageMeta({
@@ -73,8 +83,8 @@ definePageMeta({
     <h3>Simple and fun recipes</h3>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     
-    <ul v-if="recipes && recipes.length">
-      <li v-for="(recipe, index) in recipes" :key="index">
+    <ul v-if="filteredRecipes && filteredRecipes.length">
+      <li v-for="(recipe, index) in filteredRecipes" :key="index">
         <NuxtLink :to="`/recipe/${recipe.recipe_id}`">{{ recipe.title }}</NuxtLink>
       </li>
     </ul>
