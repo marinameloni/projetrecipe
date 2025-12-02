@@ -1,11 +1,23 @@
-@use "elements/button"as*;
-@use "elements/card"as*;
-@use "foundations/variables"as*;
-@use "foundations/mixins"as*;
+// 1. Foundations
+@use "foundations/variables" as *;
+@use "foundations/mixins" as *;
 
+// 2. Objects (Layouts & Grids)
+// Create a folder named 'objects' for these
+@use "objects/layout" as *;
+
+// 3. Elements & Components
+@use "elements/button" as *;
+@use "elements/card" as *;
+@use "elements/badge" as *; // New: For the pills/tags
+@use "elements/forms" as *; // New: For the category filter chips
+
+// 4. Global Resets
 * {
     font-family: var(--font-primary);
+    box-sizing: border-box;
 }
+
 h1 {
     @include h1();
 }
@@ -20,4 +32,10 @@ h3 {
 
 p {
     @include p();
+}
+
+// Utility to handle images globally if needed
+img {
+    max-width: 100%;
+    display: block;
 }

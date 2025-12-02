@@ -1,0 +1,26 @@
+name: Typecheck
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - feat/**
+  pull_request:
+    branches:
+      - master
+      - main
+      - feat/**
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Check type errors
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+      - run: npm ci
+      - run: npx nuxi typecheck

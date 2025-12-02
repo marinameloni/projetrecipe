@@ -1,7 +1,14 @@
-@use "elements/button"as*;
-@use "elements/card"as*;
-@use "foundations/variables"as*;
-@use "foundations/mixins"as*;
+// Foundations first (variables, functions, mixins)
+@use "foundations/variables" as *;
+@use "foundations/functions" as *;
+@use "foundations/mixins" as *;
+
+// Elements (components that use foundations)
+@use "elements/button" as *;
+@use "elements/card" as *;
+
+// Pages
+@use "pages/index" as *;
 
 * {
     font-family: var(--font-primary);

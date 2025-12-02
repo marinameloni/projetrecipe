@@ -10,15 +10,17 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `
-          @use "@/styles/foundations/functions" as *;
-          @use "@/styles/foundations/variables" as *;
-          @use "@/styles/foundations/mixins" as *;
-
-          `,
+          additionalData: `@use "~/styles/foundations/variables" as *; @use "~/styles/foundations/functions" as *; @use "~/styles/foundations/mixins" as *;`,
         },
       },
     },
   },
+
+  runtimeConfig: {
+    public: {
+      apiUrl: "http://localhost:4000",
+    },
+  },
+
   modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/test-utils"],
 });
