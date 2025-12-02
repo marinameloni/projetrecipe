@@ -227,3 +227,7 @@ definePageMeta({
   </div>
   </div>
 </template>
+
+<style lang="scss" scoped>
+@import '~/components/styles/foundations/_recipe-detail.scss';
+</style>

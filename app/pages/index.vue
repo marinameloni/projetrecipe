@@ -30,20 +30,33 @@ const { data: cuisines } = await useAsyncData<Cuisine[]>(
   { server: false, default: () => [] }
 )
 
-const filters = ref<string[]>([]);
+const selectedCategories = ref<string[]>([]);
+const searchInput = ref<string>('');
 
-function onCheckboxInput($event: Event) {
-  const target = $event.target;
-  if (!(target instanceof HTMLInputElement)) return;
+// Category selection handled by CategoryFilterSidebar via update:selected
 
-  const value = target.value
-  if (!filters.value.includes(value)){
-    filters.value.push(value)
-  } else {
-    const index = filters.value.findIndex(v => v == value)
-    filters.value.splice(index, 1)
+const filteredRecipes = computed(() => {
+  let results = recipes.value || []
+  
+  // Filter by search input
+  if (searchInput.value.trim()) {
+    const query = searchInput.value.toLowerCase().trim()
+    results = results.filter(recipe => 
+      recipe.title?.toLowerCase().includes(query) ||
+      recipe.description?.toLowerCase().includes(query) ||
+      recipe.cuisine_name?.toLowerCase().includes(query)
+    )
   }
-}
+  
+  // Filter by selected categories
+  if (selectedCategories.value.length > 0) {
+    results = results.filter(recipe => 
+      selectedCategories.value.includes(recipe.cuisine_name || '')
+    )
+  }
+  
+  return results
+})
 
 const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
 
@@ -53,48 +66,30 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <div class="o-container">
+    
     <div class="o-recipeBlock">
-      <div class="m-card">
-        <div class="m-card__contentLeft">
-          <h1>Spicy delicious chicken wings</h1>
-        </div>
-
-        <div class="m-card__mediaWrapper">
-          <img src="https://placeholder.pics/svg/600x400" alt="Delicious Chicken Wings">
-        </div>
-        <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="a-button -primary">
-          View Recipe
-        </NuxtLink>
-      </div>
+      <AppHero
+        :title="recipes?.[0]?.title"
+        :description="recipes?.[0]?.description"
+        :image-url="recipes?.[0]?.image_url"
+        :first-recipe-id="firstRecipeId"
+      />
     </div>
-    
-    <h2>Categories</h2>
-    <h3>Simple and fun recipes</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    
-    <ul v-if="recipes && recipes.length">
-      <li v-for="(recipe, index) in recipes" :key="index">
-        <NuxtLink :to="`/recipe/${recipe.recipe_id}`">{{ recipe.title }}</NuxtLink>
-      </li>
-    </ul>
-    <p v-else>No recipes found.</p>
 
-    <div class="recipe-filters">
-      <h2>Filter by Cuisine</h2>
-      <p>Active filters: {{ filters }}</p>
-      <ul>
-        <li v-for="(cuisine, index) in cuisines" :key="index">
-          <input
-            :id="cuisine.name"
-            type="checkbox"
-            :value="cuisine.name"
-            @click="onCheckboxInput"
-          >
-          <label :for="cuisine.name">{{ cuisine.name }}</label>
-        </li>
-      </ul>
-    </div>
+    <SearchBar v-model="searchInput" />
+    
+      <section class="o-section o-section--withSidebar">
+        <CategoryFilterSidebar :cuisines="cuisines || []" :selected="selectedCategories" @update:selected="(v) => selectedCategories = v" />
+        <div class="o-section__main">
+        <div class="o-section__content">
+          <h3>Simple and tasty recipes</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <RecipeGrid v-if="filteredRecipes && filteredRecipes.length" :recipes="filteredRecipes" />
+        <p v-else>No recipes found.</p>
+        </div>
+      </section>
+
   </div>
 </template>
-
