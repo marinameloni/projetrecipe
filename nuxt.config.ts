@@ -20,5 +20,12 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  runtimeConfig: {
+    public: {
+      apiUrl: "http://localhost:4000",
+    },
+  },
+
   modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/test-utils"],
 });

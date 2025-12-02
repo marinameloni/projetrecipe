@@ -8,3 +8,22 @@ type Recipe = {
   diet_name: string;
   allergy_name: string;
 };
+
+type RecipeInstruction = {
+    instruction_id: number;
+    step_number: number;
+    description: string;
+};
+
+type RecipeIngredient = {
+    ingredient_id: number;
+    name: string;
+    unit: string;
+    quantity: number;
+};
+    
+
+type FullRecipe = Recipe & {
+    instructions: RecipeInstruction[]
+    ingredients: RecipeIngredient[]
+};

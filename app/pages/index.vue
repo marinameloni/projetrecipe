@@ -1,10 +1,25 @@
 <script setup lang="ts">
-const { data: recipes, error } = await useAsyncData("recipes", async () => {
-  const response = await $fetch<{ data: Recipe[] }>("http://localhost:4000/api/recipes");
-  return response.data;
-});
+const config = useRuntimeConfig()
 
-if (error && error.value) throw new Error("Page not Found");
+// Normalize base URL to avoid double slashes
+const apiBase = (config.public.apiUrl || '').replace(/\/+$/, '')
+
+const { data: recipes } = await useAsyncData(
+  'recipes-list',
+  async () => {
+    try {
+      const res = await $fetch<Recipe[] | { data: Recipe[] }>(`${apiBase}/api/recipes`)
+      return Array.isArray(res) ? res : (res?.data ?? [])
+    } catch (err) {
+      console.error('Failed to fetch recipes:', err)
+      return []
+    }
+  },
+  { server: false, default: () => [] }
+)
+
+const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
+
 definePageMeta({
   layout: 'aside'
 })
@@ -21,9 +36,9 @@ definePageMeta({
         <div class="m-card__mediaWrapper">
           <img src="https://placeholder.pics/svg/600x400" alt="Delicious Chicken Wings">
         </div>
-
-        <button class="a-button -primary">View Recipe
-        </button>
+        <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="a-button -primary">
+          View Recipe
+        </NuxtLink>
       </div>
     </div>
     
@@ -32,8 +47,11 @@ definePageMeta({
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     
     <ul v-if="recipes && recipes.length">
-      <li v-for="(recipe, index) in recipes" :key="index">{{ recipe.title }}</li>
+      <li v-for="(recipe, index) in recipes" :key="index">
+        <NuxtLink :to="`/recipe/${recipe.recipe_id}`">{{ recipe.title }}</NuxtLink>
+      </li>
     </ul>
+    <p v-else>No recipes found.</p>
   </div>
 </template>
 
