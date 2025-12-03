@@ -33,6 +33,10 @@ const { data: cuisines } = await useAsyncData<Cuisine[]>(
 const selectedCategories = ref<string[]>([]);
 const searchInput = ref<string>('');
 
+// Pagination
+const page = ref(1)
+const RECIPES_PER_PAGE = 6
+
 // Category selection handled by CategoryFilterSidebar via update:selected
 
 const filteredRecipes = computed(() => {
@@ -57,6 +61,24 @@ const filteredRecipes = computed(() => {
   
   return results
 })
+
+// Reset to page 1 when filters change
+watch(() => [selectedCategories.value, searchInput.value], () => {
+  page.value = 1
+})
+
+const displayedRecipes = computed<Recipe[]>(() => {
+  if (!filteredRecipes.value) return []
+  return filteredRecipes.value.slice((page.value - 1) * RECIPES_PER_PAGE, page.value * RECIPES_PER_PAGE)
+})
+
+const totalPages = computed(() => {
+  return Math.ceil(filteredRecipes.value.length / RECIPES_PER_PAGE)
+})
+
+function onPageClick(pageNumber: number) {
+  page.value = pageNumber
+}
 
 const firstRecipeId = computed<number | null>(() => recipes?.value?.[0]?.recipe_id ?? null)
 
@@ -96,7 +118,21 @@ definePageMeta({
           <h3>Simple and tasty recipes</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
-        <RecipeGrid v-if="filteredRecipes && filteredRecipes.length" :recipes="filteredRecipes" />
+        
+        <!-- Pagination Controls -->
+        <div v-if="totalPages > 1" class="o-pagination">
+          <button 
+            v-for="n in totalPages" 
+            :key="`page-${n}`"
+            class="o-pagination__button"
+            :class="{ 'o-pagination__button--active': page === n }"
+            @click="onPageClick(n)"
+          >
+            {{ n }}
+          </button>
+        </div>
+
+        <RecipeGrid v-if="displayedRecipes && displayedRecipes.length" :recipes="displayedRecipes" />
         <p v-else>No recipes found.</p>
         </div>
       </section>
