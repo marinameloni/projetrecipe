@@ -8,7 +8,7 @@
       <nav class="nav-menu">
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/recipes">Recipes</NuxtLink>
-        <NuxtLink to="/blog">Blog</NuxtLink>
+        <NuxtLink to="/login">Login</NuxtLink>
         <NuxtLink to="/contact">Contact</NuxtLink>
         <NuxtLink to="/about">About us</NuxtLink>
       </nav>
