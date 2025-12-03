@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 
-export default defineNuxtRouteMiddleware((to, from) => {
+export default defineNuxtRouteMiddleware((_to, _from) => {
   const token = useCookie("recipe_token");
   if (!token || !token.value || !token.value.length)
     return navigateTo("/login");

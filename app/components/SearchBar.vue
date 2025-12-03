@@ -15,10 +15,10 @@ function onInput(e: Event) {
     </svg>
     <input
       :value="props.modelValue"
-      @input="onInput"
       type="text"
       placeholder="Search recipes by name, cuisine, or description..."
       class="m-searchBar__input"
+      @input="onInput"
     >
     <button
       v-if="props.modelValue"

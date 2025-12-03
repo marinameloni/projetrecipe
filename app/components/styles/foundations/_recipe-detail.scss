@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // Variables
 $color-bg-light: #eafaff;
 $color-text-dark: #000000;
@@ -162,7 +164,7 @@ $border-radius-lg: 24px;
   }
 
   &:hover &__icon {
-    background-color: darken($color-bg-light, 5%);
+    background-color: color.adjust($color-bg-light, $lightness: -5%);
   }
 }
 
@@ -622,7 +624,7 @@ $border-radius-lg: 24px;
 
     &:hover {
       transform: translateY(-2px);
-      background-color: lighten($color-text-dark, 10%);
+      background-color: color.adjust($color-text-dark, $lightness: 10%);
     }
 
     &:active {
