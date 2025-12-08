@@ -29,8 +29,9 @@ await useAsyncData('my-recipes', () => {
   <div class="p-dashboard">
     <AppHeader />
     <h1>Dashboard</h1>
-    <YourRecipes />
     <AddRecipeForm />
+    <YourRecipes />
+    
     <button @click="onLogoutClick">Log out</button>
 
   </div>

@@ -6,6 +6,21 @@ export default defineNuxtConfig({
   components: [
     { path: "~/components", pathPrefix: false, extensions: ["vue"] },
   ],
+  
+
+  runtimeConfig: {
+    public: {
+      apiUrl: "http://localhost:4000",
+    },
+  },
+
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/image",
+    "@nuxt/test-utils",
+    "@nuxtjs/sanity",
+  ],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -14,13 +29,13 @@ export default defineNuxtConfig({
         },
       },
     },
-  },
-
-  runtimeConfig: {
-    public: {
-      apiUrl: "http://localhost:4000",
+    optimizeDeps: {
+      include: ["react-compiler-runtime", "react", "react-dom"],
     },
+    
   },
-
-  modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/test-utils"],
+  sanity: {
+    projectId: "hi3cpzph",
+    dataset: "production",
+  },
 });
