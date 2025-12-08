@@ -15,7 +15,7 @@ const urlFor = (source: SanityImageSource) =>
 const query = `*[
   _type == "book"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, body, author->{name}}`;
 
 const { data: books } = await useLazySanityQuery<SanityDocument[]>(query)
 useHead({

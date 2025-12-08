@@ -11,6 +11,7 @@
 @use "pages/index" as *;
 @use "pages/dashboard" as *;
 @use "pages/books" as *;
+@use "pages/book" as *;
 
 // Components
 @use "components/addRecipeForm" as *;
