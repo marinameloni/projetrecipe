@@ -9,6 +9,7 @@
 
 // Pages
 @use "pages/index" as *;
+@use "pages/dashboard" as *;
 
 * {
     font-family: var(--font-primary);
