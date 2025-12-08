@@ -30,9 +30,19 @@
 
 .o-gridList {
     display: grid;
-    // Creates the 3-column layout
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    // Creates a fixed 3-column layout (3x2 grid for 6 recipes)
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     list-style: none;
     padding: 0;
+
+    // Responsive: 2 columns on tablets
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    // Responsive: 1 column on mobile
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
 }

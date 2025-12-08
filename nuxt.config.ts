@@ -14,6 +14,9 @@ export default defineNuxtConfig({
         },
       },
     },
+    optimizeDeps: {
+      include: ["react-compiler-runtime", "react", "react-dom"],
+    },
   },
 
   runtimeConfig: {
@@ -22,5 +25,20 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/eslint", "@nuxt/image", "@nuxt/test-utils"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/image",
+    "@nuxt/test-utils",
+    "@nuxtjs/sanity",
+  ],
+
+  sanity: {
+    projectId: "hi3cpzph",
+    dataset: "production",
+    visualEditing: {
+      token: process.env.NUXT_SANITY_API_TOKEN,
+      studioUrl: process.env.NUXT_SANITY_STUDIO_URL,
+      stega: false,
+    },
+  },
 });

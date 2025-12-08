@@ -9,6 +9,11 @@
 
 // Pages
 @use "pages/index" as *;
+@use "pages/dashboard" as *;
+@use "pages/books" as *;
+
+// Components
+@use "components/addRecipeForm" as *;
 
 * {
     font-family: var(--font-primary);

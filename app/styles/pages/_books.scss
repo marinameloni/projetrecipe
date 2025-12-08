@@ -1,0 +1,122 @@
+@use "../foundations/variables" as *;
+@use "../foundations/mixins" as *;
+
+// --------------------------------------------------------
+// Books Page
+// --------------------------------------------------------
+.m-booksPage {
+  min-height: 100vh;
+  background-color: #fafafa;
+
+  &__wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+
+    @media (max-width: 768px) {
+      padding: 40px 20px;
+    }
+  }
+
+  &__header {
+    margin-bottom: 60px;
+    text-align: center;
+  }
+
+  &__title {
+    @include h1();
+    margin-bottom: 16px;
+    color: #1a1a1a;
+  }
+
+  &__subtitle {
+    @include p();
+    font-size: 18px;
+    color: #666;
+  }
+}
+
+// --------------------------------------------------------
+// Books List
+// --------------------------------------------------------
+.m-booksList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+// --------------------------------------------------------
+// Book Card
+// --------------------------------------------------------
+.m-bookCard {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  &__cover {
+    width: 100%;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(231, 250, 254, 0.5) 0%, var(--blue-1) 100%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+
+    .m-bookCard:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  &__date {
+    font-size: 13px;
+    color: #999;
+    margin: 0;
+  }
+}

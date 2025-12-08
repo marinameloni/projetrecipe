@@ -9,7 +9,7 @@
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/recipes">Recipes</NuxtLink>
         <NuxtLink to="/login">Login</NuxtLink>
-        <NuxtLink to="/contact">Contact</NuxtLink>
+        <NuxtLink to="/books">Our books</NuxtLink>
         <NuxtLink to="/about">About us</NuxtLink>
       </nav>
 

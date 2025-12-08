@@ -1,4 +1,4 @@
 type Cuisine = {
-    cuisineId: number;
-    name: string
+  cuisine_id: number;
+  name: string;
 };
