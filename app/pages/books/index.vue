@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client"
+import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
+
+const BOOK_QUERY = groq`*[_type == "book" && slug.current == $slug][0]`;
+const { params } = useRoute();
+
+const { data: book } = await useLazySanityQuery<SanityDocument>(BOOK_QUERY, params);
+const { projectId, dataset } = useSanity().client.config();
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? createImageUrlBuilder({ projectId, dataset }).image(source)
+    : null;
 
 const query = `*[
   _type == "book"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image}`
 
 const { data: books } = await useLazySanityQuery<SanityDocument[]>(query)
-
 useHead({
   title: 'Our Books | Foodieland',
   meta: [{ name: 'description', content: 'Explore our collection of recipe books and culinary guides.' }]
 })
+
+
 </script>
 
 <template>
@@ -28,10 +40,13 @@ useHead({
         <li v-for="book in books" :key="book._id" class="m-bookCard">
           <NuxtLink :to="`/books/${book.slug.current}`" class="m-bookCard__link">
             <div class="m-bookCard__cover">
-              <img 
-                :src="book.imageUrl || 'https://placeholder.pics/svg/300x400'" 
-                :alt="book.title"
-                class="m-bookCard__image">
+              <img
+      v-if="book.image"
+      :src="urlFor(book.image)?.width(400).height(600).url()"
+      :alt="book?.title"
+      class="aspect-[2/3] rounded-xl"
+      width="400"
+      height="600">
             </div>
             <div class="m-bookCard__content">
               <h2 class="m-bookCard__title">{{ book.title }}</h2>

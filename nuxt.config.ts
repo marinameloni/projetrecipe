@@ -6,7 +6,18 @@ export default defineNuxtConfig({
   components: [
     { path: "~/components", pathPrefix: false, extensions: ["vue"] },
   ],
-  
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "~/styles/foundations/variables" as *; @use "~/styles/foundations/functions" as *; @use "~/styles/foundations/mixins" as *;`,
+        },
+      },
+    },
+    optimizeDeps: {
+      include: ["react-compiler-runtime", "react", "react-dom"],
+    },
+  },
 
   runtimeConfig: {
     public: {
@@ -21,21 +32,13 @@ export default defineNuxtConfig({
     "@nuxtjs/sanity",
   ],
 
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@use "~/styles/foundations/variables" as *; @use "~/styles/foundations/functions" as *; @use "~/styles/foundations/mixins" as *;`,
-        },
-      },
-    },
-    optimizeDeps: {
-      include: ["react-compiler-runtime", "react", "react-dom"],
-    },
-    
-  },
   sanity: {
     projectId: "hi3cpzph",
     dataset: "production",
+    visualEditing: {
+      token: process.env.NUXT_SANITY_API_TOKEN,
+      studioUrl: process.env.NUXT_SANITY_STUDIO_URL,
+      stega: false,
+    },
   },
 });
