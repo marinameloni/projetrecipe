@@ -2,10 +2,6 @@
 import type { SanityDocument } from "@sanity/client"
 import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
 
-const BOOK_QUERY = groq`*[_type == "book" && slug.current == $slug][0]`;
-const { params } = useRoute();
-
-const { data: book } = await useLazySanityQuery<SanityDocument>(BOOK_QUERY, params);
 const { projectId, dataset } = useSanity().client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
