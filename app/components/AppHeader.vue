@@ -10,7 +10,15 @@
         <NuxtLink to="/recipes">Recipes</NuxtLink>
         <NuxtLink to="/login">Login</NuxtLink>
         <NuxtLink to="/books">Our books</NuxtLink>
-        <NuxtLink to="/about">About us</NuxtLink>
+        <template v-if="siteSettings?.headerLinks">
+          <NuxtLink
+            v-for="link in siteSettings.headerLinks"
+            :key="link.url"
+            :to="link.url"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </template>
       </nav>
 
       <div class="header-actions">
@@ -23,6 +31,22 @@
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+interface HeaderLink {
+  label: string;
+  url: string;
+}
+
+interface SiteSettings {
+  headerLinks?: HeaderLink[];
+  logo?: Record<string, unknown>;
+  title?: string;
+  description?: string;
+}
+
+const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings | null> };
+</script>
 
 <style lang="scss" scoped>
 .app-header {
