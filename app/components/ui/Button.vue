@@ -4,7 +4,7 @@
     :class="buttonClasses"
     @click="onClick"
   >
-    {{ label }}
+    <slot>{{ label }}</slot>
   </button>
 </template>
 
@@ -12,12 +12,15 @@
 import { computed } from 'vue'
 
 interface Props {
-  label: string
+  label?: string
   variant?: 'primary' | 'secondary' | 'default'
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'default'
+  label: '',
+  variant: 'default',
+  disabled: false
 })
 
 const emit = defineEmits<{
@@ -26,18 +29,20 @@ const emit = defineEmits<{
 
 const buttonClasses = computed(() => {
   return [
-    'a-button',
-    props.variant !== 'default' ? `-${props.variant}` : ''
+    'c-button',
+    props.variant !== 'default' ? `c-button--${props.variant}` : ''
   ]
 })
 
 const onClick = (event: MouseEvent) => {
-  emit('click', event)
+  if (!props.disabled) {
+    emit('click', event)
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.a-button {
+.c-button {
   display: inline-block;
   padding: 20px 20px;
   border: none;
@@ -45,7 +50,7 @@ const onClick = (event: MouseEvent) => {
   font-size: 16px;
   transition: background-color 0.3s;
 
-  &.-primary {
+  &--primary {
     padding: 25px 60px;
     background-color: black;
     color: white;
@@ -56,7 +61,7 @@ const onClick = (event: MouseEvent) => {
     }
   }
 
-  &.-secondary {
+  &--secondary {
     padding: 20px 40px;
     background-color: transparent;
     color: black;
@@ -67,6 +72,11 @@ const onClick = (event: MouseEvent) => {
       background-color: black;
       color: white;
     }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 </style>
