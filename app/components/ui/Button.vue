@@ -4,7 +4,7 @@
     :class="buttonClasses"
     @click="onClick"
   >
-    {{ label }}
+    <slot>{{ label }}</slot>
   </button>
 </template>
 
@@ -12,12 +12,15 @@
 import { computed } from 'vue'
 
 interface Props {
-  label: string
+  label?: string
   variant?: 'primary' | 'secondary' | 'default'
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'default'
+  label: '',
+  variant: 'default',
+  disabled: false
 })
 
 const emit = defineEmits<{
@@ -32,7 +35,9 @@ const buttonClasses = computed(() => {
 })
 
 const onClick = (event: MouseEvent) => {
-  emit('click', event)
+  if (!props.disabled) {
+    emit('click', event)
+  }
 }
 </script>
 
@@ -67,6 +72,11 @@ const onClick = (event: MouseEvent) => {
       background-color: black;
       color: white;
     }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 </style>
