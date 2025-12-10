@@ -15,6 +15,7 @@
 
 // Components
 @use "components/addRecipeForm" as *;
+@import "../components/styles/_button.scss";
 
 * {
     font-family: var(--font-primary);

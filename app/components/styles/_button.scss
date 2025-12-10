@@ -1,0 +1,28 @@
+// Button styles for BEM methodology
+.c-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  border: none;
+  background: #fff;
+  color: #222;
+
+  &--black {
+    background: #222;
+    color: #fff;
+  }
+  &--black:hover {
+    background: #444;
+  }
+  &__icon {
+    font-size: 1.1em;
+    margin-left: 4px;
+  }
+}

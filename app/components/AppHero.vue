@@ -25,14 +25,14 @@ defineProps<{
 
       <div class="m-hero__actions">
         <div class="m-hero__user">
-          <div class="m-hero__avatar" />
+          <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=John" alt="User avatar" class="m-hero__avatar">
           <div class="m-hero__userInfo">
-            <span>John Smith</span>
-            <small>15 March 2022</small>
+            <span>John Smith </span>
+            <small>15 March 2024</small>
           </div>
         </div>
-        <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="a-button a-button--black">
-          View Recipes <span class="a-icon">▶</span>
+        <NuxtLink v-if="firstRecipeId" :to="`/recipe/${firstRecipeId}`" class="c-button c-button--black">
+          View Recipes <span class="c-button__icon">▶</span>
         </NuxtLink>
       </div>
     </div>
@@ -58,5 +58,6 @@ defineProps<{
 .m-hero__avatar { width: 36px; height: 36px; background: #ddd; border-radius: 50% }
 .m-hero__media { position: relative }
 .m-hero__image { width: 100%; height: auto; border-radius: 16px }
-.m-hero__floatingBadge { position: absolute; bottom: 12px; right: 12px; background: #fff; border-radius: 12px; padding: 6px 10px }
+.m-hero__floatingBadge { position: absolute; bottom: 12px; right: 12px; background: #f0f1f3; border-radius: 12px; padding: 6px 10px }
+
 </style>
