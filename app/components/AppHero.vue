@@ -21,7 +21,7 @@ defineProps<{
       <div class="m-hero__metaList">
         <span class="m-hero__meta">⏱ 30 Minutes</span>
         <span class="m-hero__meta">🍗 Chicken</span>
-      </div>
+      </div> 
 
       <div class="m-hero__actions">
         <div class="m-hero__user">
