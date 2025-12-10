@@ -1,3 +1,20 @@
+<script setup lang="ts">
+interface HeaderLink {
+  label: string;
+  url: string;
+}
+
+interface SiteSettings {
+  headerLinks?: HeaderLink[];
+  logo?: Record<string, unknown>;
+  title?: string;
+  description?: string;
+}
+
+const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings | null> };
+</script>
+
+
 <template>
   <header class="app-header">
     <div class="header-container">
@@ -9,7 +26,6 @@
         <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/recipes">Recipes</NuxtLink>
         <NuxtLink to="/login">Login</NuxtLink>
-        <NuxtLink to="/books">Our books</NuxtLink>
         <template v-if="siteSettings?.headerLinks">
           <NuxtLink
             v-for="link in siteSettings.headerLinks"
@@ -32,21 +48,7 @@
   </header>
 </template>
 
-<script setup lang="ts">
-interface HeaderLink {
-  label: string;
-  url: string;
-}
 
-interface SiteSettings {
-  headerLinks?: HeaderLink[];
-  logo?: Record<string, unknown>;
-  title?: string;
-  description?: string;
-}
-
-const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings | null> };
-</script>
 
 <style lang="scss" scoped>
 .app-header {

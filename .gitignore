@@ -18,6 +18,15 @@ logs
 .fleet
 .idea
 
+# Audit documentation
+audit/
+AUDIT_REPORT.md
+AUDIT_SUMMARY.md
+CORRECTIONS_GUIDE.md
+INDEX_AUDIT.md
+RAPPORT_FINAL.md
+app/components/**/*.md
+
 # Local env files
 .env
 .env.*
