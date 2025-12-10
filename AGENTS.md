@@ -21,7 +21,7 @@ This document contains AI agent conversation summaries and style guidelines for 
 
 **🟡 Areas for Improvement:**
 
-- ABEM/BEM consistency (now clarified: both acceptable if consistent)
+- BEM consistency (now clarified: both acceptable if consistent)
 - HTML tag targeting (acceptable for Sanity WYSIWYG content only)
 - Props typing incomplete on some components
 - Mobile responsiveness needs work (no hamburger menu)
@@ -33,20 +33,6 @@ This document contains AI agent conversation summaries and style guidelines for 
 - Empty/duplicate signIn.vue page
 - Hardcoded options (cuisines, goals, metadata)
 - Missing composables for API calls (code duplication)
-
-### Documentation Generated
-
-**Audit Reports (in `/audit/`):**
-
-- `INDEX_AUDIT.md` - Navigation guide
-- `AUDIT_SUMMARY.md` - Executive summary
-- `AUDIT_REPORT.md` - Complete detailed analysis ⭐
-- `CORRECTIONS_GUIDE.md` - Implementation plan with code snippets
-- `RAPPORT_FINAL.md` - Final comprehensive report
-
-**Component Documentation (in `/app/components/`):**
-
-- 10 markdown files for each component with prompts, props, styles, and improvement points
 
 ### Timeline for Corrections
 
@@ -568,17 +554,12 @@ If you stick to those principles you'll avoid a whole bunch of problems mostly l
 
 ### Clarifications Made During Audit
 
-1. **ABEM vs BEM:** Both methodologies are acceptable if applied consistently. The project uses a mix which is acceptable as long as it remains coherent within components.
+1. **ABEM vs BEM:** USE BEM!
 
 2. **HTML Tag Targeting:** Direct HTML tag targeting (h1, h2, h3, p, img) is acceptable ONLY for Sanity CMS WYSIWYG content where you cannot add classes. For UI components, always use proper class naming with BEM/ABEM conventions.
 
 3. **Component Documentation:** All 10 major components now have `.md` files documenting their props, events, prompts used, usage examples, and improvement points.
 
-### Quick Links
-
-- **Full Audit:** `/audit/AUDIT_REPORT.md`
-- **Action Plan:** `/audit/CORRECTIONS_GUIDE.md`
-- **Navigation:** `/audit/INDEX_AUDIT.md`
 
 ---
 
