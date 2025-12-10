@@ -3,18 +3,11 @@
 @use "foundations/functions" as *;
 @use "foundations/mixins" as *;
 
-// Elements (components that use foundations)
-@use "elements/button" as *;
-@use "elements/card" as *;
-
 // Pages
 @use "pages/index" as *;
 @use "pages/dashboard" as *;
 @use "pages/books" as *;
 @use "pages/book" as *;
-
-// Components
-@use "components/addRecipeForm" as *;
 
 * {
     font-family: var(--font-primary);
