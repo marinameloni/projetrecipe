@@ -29,8 +29,8 @@ const emit = defineEmits<{
 
 const buttonClasses = computed(() => {
   return [
-    'a-button',
-    props.variant !== 'default' ? `-${props.variant}` : ''
+    'c-button',
+    props.variant !== 'default' ? `c-button--${props.variant}` : ''
   ]
 })
 
@@ -42,7 +42,7 @@ const onClick = (event: MouseEvent) => {
 </script>
 
 <style scoped lang="scss">
-.a-button {
+.c-button {
   display: inline-block;
   padding: 20px 20px;
   border: none;
@@ -50,7 +50,7 @@ const onClick = (event: MouseEvent) => {
   font-size: 16px;
   transition: background-color 0.3s;
 
-  &.-primary {
+  &--primary {
     padding: 25px 60px;
     background-color: black;
     color: white;
@@ -61,7 +61,7 @@ const onClick = (event: MouseEvent) => {
     }
   }
 
-  &.-secondary {
+  &--secondary {
     padding: 20px 40px;
     background-color: transparent;
     color: black;

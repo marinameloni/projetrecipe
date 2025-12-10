@@ -1,6 +1,6 @@
 <template>
   <div :class="cardClasses">
-    <div class="m-card__contentLeft">
+    <div class="c-card-hero__content">
       <slot name="content">
         <h1 v-if="title">{{ title }}</h1>
       </slot>
@@ -11,7 +11,7 @@
       </slot>
     </div>
 
-    <div class="m-card__mediaWrapper">
+    <div class="c-card-hero__media">
       <img :src="imageSrc" :alt="imageAlt">
     </div>
   </div>
@@ -39,7 +39,7 @@ const emit = defineEmits<{
   buttonClick: [event: MouseEvent]
 }>()
 
-const cardClasses = computed(() => ['m-card'])
+const cardClasses = computed(() => ['c-card-hero'])
 
 const onButtonClick = (event: MouseEvent) => {
   emit('buttonClick', event)
@@ -47,7 +47,7 @@ const onButtonClick = (event: MouseEvent) => {
 </script>
 
 <style scoped lang="scss">
-.m-card {
+.c-card-hero {
   background-color: var(--blue-1);
   border-radius: 30px;
   overflow: hidden;
@@ -61,13 +61,13 @@ const onButtonClick = (event: MouseEvent) => {
     grid-template-columns: 1fr;
     text-align: center;
 
-    .m-card__contentLeft {
+    .c-card-hero__content {
       padding: 40px 20px;
       align-items: center;
     }
   }
 
-  &__contentLeft {
+  &__content {
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -76,7 +76,7 @@ const onButtonClick = (event: MouseEvent) => {
     gap: 24px;
   }
 
-  &__mediaWrapper {
+  &__media {
     width: 100%;
     height: 100%;
     min-height: 400px;
@@ -90,7 +90,7 @@ const onButtonClick = (event: MouseEvent) => {
     }
   }
 
-  .a-button {
+  .c-button {
     margin-top: 10px;
     display: inline-block;
     padding: 25px 60px;

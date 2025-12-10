@@ -1,6 +1,6 @@
 <template>
   <div :class="recipeCardClasses">
-    <div class="m-recipeCard__media">
+    <div class="c-card-recipe__media">
       <img :src="imageSrc" :alt="imageAlt">
       <button 
         v-if="showFavorite"
@@ -12,8 +12,8 @@
       </button>
     </div>
 
-    <div class="m-recipeCard__content">
-      <div class="m-recipeCard__title">
+    <div class="c-card-recipe__content">
+      <div class="c-card-recipe__title">
         <slot name="title">
           <NuxtLink v-if="linkTo" :to="linkTo">
             {{ title }}
@@ -51,11 +51,11 @@ const emit = defineEmits<{
   favoriteClick: [event: MouseEvent]
 }>()
 
-const recipeCardClasses = computed(() => ['m-recipeCard'])
+const recipeCardClasses = computed(() => ['c-card-recipe'])
 
 const favoriteClasses = computed(() => [
-  'a-favButton',
-  props.isFavorite ? 'a-favButton--active' : ''
+  'c-button-fav',
+  props.isFavorite ? 'c-button-fav--is-active' : ''
 ])
 
 const onFavoriteClick = (event: MouseEvent) => {
@@ -64,7 +64,7 @@ const onFavoriteClick = (event: MouseEvent) => {
 </script>
 
 <style scoped lang="scss">
-.m-recipeCard {
+.c-card-recipe {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--blue-1) 100%);
   border-radius: 30px;
   padding: 16px;
@@ -123,7 +123,7 @@ const onFavoriteClick = (event: MouseEvent) => {
   }
 }
 
-.a-favButton {
+.c-button-fav {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -141,7 +141,7 @@ const onFavoriteClick = (event: MouseEvent) => {
   z-index: 2;
 
   &:hover,
-  &--active {
+  &--is-active {
     color: #FF6363;
     transform: scale(1.1);
   }

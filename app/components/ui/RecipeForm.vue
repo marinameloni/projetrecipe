@@ -215,7 +215,7 @@ const isSubmitting = ref(false)
 const successMessage = ref('')
 const errorMessage = ref('')
 
-const formClasses = computed(() => ['m-addRecipeForm'])
+const formClasses = computed(() => ['c-form-recipe'])
 
 const onSubmit = async () => {
   if (!formData.value.title || !formData.value.description || !formData.value.image_url || 
