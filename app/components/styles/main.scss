@@ -6,13 +6,7 @@
 // Create a folder named 'objects' for these
 @use "objects/layout" as *;
 
-// 3. Elements & Components
-@use "elements/button" as *;
-@use "elements/card" as *;
-@use "elements/badge" as *; // New: For the pills/tags
-@use "elements/forms" as *; // New: For the category filter chips
-
-// 4. Global Resets
+// 3. Global Resets
 * {
     font-family: var(--font-primary);
     box-sizing: border-box;

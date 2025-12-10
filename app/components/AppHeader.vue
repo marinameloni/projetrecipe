@@ -12,6 +12,14 @@ interface SiteSettings {
 }
 
 const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings | null> };
+const { urlFor } = useSanityImage();
+
+const logoUrl = computed(() => {
+  if (siteSettings.value && siteSettings.value.logo) {
+    return urlFor(siteSettings.value.logo as Record<string, unknown>).width(200).url();
+  }
+  return null;
+});
 </script>
 
 
@@ -19,11 +27,11 @@ const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings |
   <header class="app-header">
     <div class="header-container">
       <NuxtLink to="/" class="logo">
-        Foodieland
+        <img v-if="logoUrl" :src="logoUrl" :alt="siteSettings?.title || 'Foodieland'" class="logo__image">
+        <span v-else class="logo__text">{{ siteSettings?.title || 'Foodieland' }}</span>
       </NuxtLink>
       
       <nav class="nav-menu">
-        <NuxtLink to="/">Home</NuxtLink>
         <NuxtLink to="/recipes">Recipes</NuxtLink>
         <NuxtLink to="/login">Login</NuxtLink>
         <template v-if="siteSettings?.headerLinks">
@@ -66,16 +74,34 @@ const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings |
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
+    position: relative;
   }
 
   .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #000000;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     white-space: nowrap;
+    flex-shrink: 0;
     
-    &:hover {
+    &__image {
+      height: 30px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
+    }
+
+    &__text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000000;
+      
+      &:hover {
+        color: #333333;
+      }
+    }
+    
+    &:hover &__text {
       color: #333333;
     }
   }
@@ -83,8 +109,10 @@ const { siteSettings } = useSiteSettings() as { siteSettings: Ref<SiteSettings |
   .nav-menu {
     display: flex;
     gap: 2rem;
-    flex: 1;
     justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     
     a {
       color: #000000;
